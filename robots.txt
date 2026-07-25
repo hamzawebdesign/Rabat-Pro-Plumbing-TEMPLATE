@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hamzawebdesign.github.io/Rabat-Pro-Plumbing-TEMPLATE/sitemap.xml
