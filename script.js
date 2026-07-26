@@ -235,13 +235,19 @@ if (contactForm) {
         const whatsappNumber = "212600000000"; // Replace with the client's number
 
         const text =
-`Hello, I need a plumbing service.
+        `🔧 NEW WEBSITE REQUEST
 
-Name: ${name}
-Phone: ${phone}
+        👤 Name:
+        ${name}
 
-Problem:
-${message}`;
+        📞 Phone:
+        ${phone}
+
+        📝 Problem:
+        ${message}
+
+        📍 Sent from:
+        Rabat Pro Plumbing Website`;
 
         const url =
 `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
@@ -251,3 +257,163 @@ ${message}`;
     });
 
 }
+
+/* =========================
+   DARK MODE
+========================= */
+
+const themeToggle = document.getElementById("theme-toggle");
+
+const savedTheme = localStorage.getItem("website-theme");
+
+if(savedTheme === "dark"){
+
+    document.body.classList.add("dark-mode");
+
+    themeToggle.textContent = "☀️";
+
+}
+
+
+themeToggle.addEventListener("click", function(){
+
+    document.body.classList.toggle("dark-mode");
+
+    const darkModeActive =
+        document.body.classList.contains("dark-mode");
+
+    if(darkModeActive){
+
+        themeToggle.textContent = "☀️";
+
+        localStorage.setItem("website-theme", "dark");
+
+    }else{
+
+        themeToggle.textContent = "🌙";
+
+        localStorage.setItem("website-theme", "light");
+
+    }
+
+});
+
+/* =========================
+   SCROLL REVEAL
+========================= */
+
+const revealElements = document.querySelectorAll(
+    "section, .card, .stat, .gallery-item, .review-card, .contact-card"
+);
+
+revealElements.forEach(function(element){
+    element.classList.add("reveal");
+});
+
+const revealObserver = new IntersectionObserver(
+    function(entries){
+
+        entries.forEach(function(entry){
+
+            if(entry.isIntersecting){
+
+                entry.target.classList.add("show");
+
+                revealObserver.unobserve(entry.target);
+
+            }
+
+        });
+
+    },
+    {
+        threshold:0.15
+    }
+);
+
+revealElements.forEach(function(element){
+    revealObserver.observe(element);
+});
+
+/* =========================
+   PAGE LOADER
+========================= */
+
+window.addEventListener("load", function(){
+
+    const pageLoader =
+        document.getElementById("page-loader");
+
+    if(pageLoader){
+
+        setTimeout(function(){
+
+            pageLoader.classList.add("hide");
+
+        }, 700);
+
+    }
+
+});
+
+/* =========================
+   ALWAYS START FROM TOP
+========================= */
+
+if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+}
+
+window.addEventListener("load", function () {
+
+    window.scrollTo(0, 0);
+
+    document.documentElement.scrollTop = 0;
+
+    document.body.scrollTop = 0;
+
+});
+
+window.addEventListener("beforeunload", function () {
+
+    window.scrollTo(0, 0);
+
+});
+
+/* =========================
+   BACK TO TOP
+========================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const backToTopButton =
+        document.getElementById("back-to-top");
+
+    if (!backToTopButton) {
+        return;
+    }
+
+    window.addEventListener("scroll", function () {
+
+        if (window.scrollY > 300) {
+
+            backToTopButton.classList.add("show");
+
+        } else {
+
+            backToTopButton.classList.remove("show");
+
+        }
+
+    });
+
+    backToTopButton.addEventListener("click", function () {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    });
+
+});
